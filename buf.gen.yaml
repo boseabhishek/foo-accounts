@@ -1,0 +1,19 @@
+version: v1
+plugins:
+  - plugin: go
+    out: gen/go/accounts
+    opt:
+      - paths=source_relative
+  - plugin: go-grpc
+    out: gen/go/accounts
+    opt:
+      - paths=source_relative
+  - plugin: grpc-gateway
+    out: gen/go/accounts
+    opt:
+      - paths=source_relative
+  - plugin: openapiv2
+    out: gen/go/accounts
+    opt:
+      - ignore_comments=true
+      - disable_default_responses=true

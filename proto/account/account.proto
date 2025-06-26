@@ -1,0 +1,65 @@
+syntax = "proto3";
+
+package account;
+
+import "google/api/annotations.proto";
+import "protoc-gen-openapiv2/options/annotations.proto";
+
+option go_package = "accounts/pkg/account;account";
+
+option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_swagger) = {
+  info: {
+    title: "Account Service";
+    version: "1.0";
+    contact: {
+      name: "some-name";
+      url: "https://github.com/some-name";
+      email: "some-name@example.com";
+    };
+  };
+  schemes: [HTTP, HTTPS];
+  consumes: ["application/json"];
+  produces: ["application/json"];
+  responses: {
+    key: "default";
+    value: {
+      description: "An unexpected error occurred.";
+    }
+  }
+};
+
+
+service AccountService {
+  rpc Add(AddRequest) returns (AddResponse);
+  rpc Show(ShowRequest) returns (ShowResponse) {
+    option (google.api.http) = {
+      get: "/v1/account"
+    };
+  }
+}
+
+message Money {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+      json_schema: {
+          title: "Money"
+          description: "Money data structure"
+      };
+  };
+
+  int64 amount = 1;
+}
+
+
+message AddRequest {
+  Money money = 1;
+}
+
+message AddResponse {
+}
+
+message ShowRequest {
+}
+
+message ShowResponse {
+  Money money = 1;
+} 
