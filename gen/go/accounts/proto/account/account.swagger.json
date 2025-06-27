@@ -36,10 +36,8 @@
             }
           },
           "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/rpcStatus"
-            }
+            "description": "An unexpected error occurred.",
+            "schema": {}
           }
         },
         "tags": [
@@ -49,9 +47,6 @@
     }
   },
   "definitions": {
-    "accountAddResponse": {
-      "type": "object"
-    },
     "accountMoney": {
       "type": "object",
       "properties": {
@@ -68,34 +63,6 @@
       "properties": {
         "money": {
           "$ref": "#/definitions/accountMoney"
-        }
-      }
-    },
-    "protobufAny": {
-      "type": "object",
-      "properties": {
-        "@type": {
-          "type": "string"
-        }
-      },
-      "additionalProperties": {}
-    },
-    "rpcStatus": {
-      "type": "object",
-      "properties": {
-        "code": {
-          "type": "integer",
-          "format": "int32"
-        },
-        "message": {
-          "type": "string"
-        },
-        "details": {
-          "type": "array",
-          "items": {
-            "type": "object",
-            "$ref": "#/definitions/protobufAny"
-          }
         }
       }
     }

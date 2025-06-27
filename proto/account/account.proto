@@ -3,6 +3,8 @@ syntax = "proto3";
 package account;
 
 import "google/api/annotations.proto";
+import "google/api/visibility.proto";
+
 import "protoc-gen-openapiv2/options/annotations.proto";
 
 option go_package = "accounts/pkg/account;account";
@@ -30,7 +32,9 @@ option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_swagger) = {
 
 
 service AccountService {
-  rpc Add(AddRequest) returns (AddResponse);
+  rpc Add(AddRequest) returns (AddResponse){
+    option (google.api.method_visibility).restriction = "INTERNAL";
+  }
   rpc Show(ShowRequest) returns (ShowResponse) {
     option (google.api.http) = {
       get: "/v1/account"
@@ -61,5 +65,11 @@ message ShowRequest {
 }
 
 message ShowResponse {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+      json_schema: {
+          title: "ShowResponse"
+          description: "ShowResponse data structure"
+      };
+  };
   Money money = 1;
 } 
